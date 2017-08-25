@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script>
@@ -26,12 +28,12 @@
       if(playing == true){
         audio.pause();
         playing = false;
-        document.getElementById("playpause").value = "Play";
+        document.getElementById("pausetext").innerHTML = "Play";
       }
       else {
         audio.play();
         playing = true;
-        document.getElementById("playpause").value = "Pause";
+        document.getElementById("pausetext").innerHTML = "Pause";
       }
     }
     var playMusic = function(){
@@ -61,16 +63,41 @@
         border:outset;
         border-color: transparent;
       }
+      .hey {
+        font-family: 'Poiret One', cursive;
+      }
+      body {
+        font-family: 'Encode Sans Condensed', sans-serif;
+        color: white;
+      }
+      @keyframes color-animation {
+         0% {
+            background: #ad1457;
+         }
+         50% {
+            background: #6a1b9a;
+         }
+         100% {
+            background: #bbdefb
+         }
+      }
+
+      body {
+        width: 100%;
+        height: 100%;
+        animation: color-animation 8s infinite linear alternate;
+      }
     </style>
   </head>
   <body>
     <div class="text-center" style="padding-top:1em;padding-bottom:3em">
-      <h3>Isai - Music Player</h3>
+      <h3 >Isai - Music Player</h3>
       <hr></hr>
-      <h5>Music player created using JavaScript and HTML, which plays music according to your mood.</h5>
+      <h5 class="hey">Music player created using JavaScript and HTML, which plays music according to your mood.</h5>
     </div>
-    <div class="text-center" style="padding-top:1em;padding-bottom:5em">
+    <div class="text-center" style="padding-bottom:5em">
       <h4>How are you doing today?</h4>
+      <h4>Select an Icon to play Music!</h4>
     </div>
     <div class="row" style="padding-bottom:2em">
       <div class="col-sm-1"></div>
@@ -85,9 +112,21 @@
     <div class="text-center row">
       <div class="col-sm-4"></div>
       <div class="col-sm-4">
-        <div class="col-sm-4"><input type="button" onclick="playPrevious()" id="prev" value="Prev"></input></div>
-        <div class="col-sm-4"><input type="button" onclick="pauseMusic()" id="playpause" value="Pause"></input></div>
-        <div class="col-sm-4"><input type="button" onclick="playMusic()" id="next" value="Next"></input></div>
+          <div class="col-sm-4">
+            <button type="button" class="btn btn-default btn-lg" onclick="playPrevious()" value="Prev">
+                <span class="glyphicon glyphicon-backward" aria-hidden="true"></span> <span id="prev">Prev</span>
+            </button>
+          </div>
+          <div class="col-sm-4">
+            <button type="button" class="btn btn-default btn-lg" onclick="pauseMusic()" value="pause">
+                <span class="glyphicon glyphicon-play" aria-hidden="true" id="playPauseBtn"></span> <span id="pausetext">Pause</span>
+            </button>
+          </div>
+          <div class="col-sm-4">
+            <button type="button" class="btn btn-default btn-lg" onclick="playMusic()" value="pause">
+                <span class="glyphicon glyphicon-forward" aria-hidden="true"></span> <span id="next">Next</span>
+            </button>
+          </div>
       </div>
       <div class="col-sm-4"></div>
     </div>
