@@ -1,0 +1,96 @@
+<!DOCTYPE>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+    var mood = {"like":0,"love":1,"haha":2,"wow":3,"sad":4};
+    var playing = false,paused=false;
+    var tracks = [
+          ["000.mp3","001.mp3","002.mp3"],
+          ["100.mp3","101.mp3","102.mp3","103.mp3","104.mp3"],
+          ["200.mp3"],
+          ["300.mp3","301.mp3","302.mp3","303.mp3","304.mp3","305.mp3"],
+          ["400.mp3","401.mp3","402.mp3"]
+    ]
+    var audio, trackNumber, playlist;
+
+    var setPlaylist = function(choice){
+      playlist = tracks[mood[choice]];
+      trackNumber = 0;
+      playMusic()
+    }
+
+    var pauseMusic = function(){
+      if(playing == true){
+        audio.pause();
+        playing = false;
+        document.getElementById("playpause").value = "Play";
+      }
+      else {
+        audio.play();
+        playing = true;
+        document.getElementById("playpause").value = "Pause";
+      }
+    }
+    var playMusic = function(){
+      if(playing == true)
+        audio.pause();
+        playing = false;
+      // audio = new Audio("res/Sirikkadhey.mp3")
+      audio = new Audio("res/"+playlist[trackNumber]);
+      trackNumber = (trackNumber+1)%playlist.length;
+      playing = true;
+      audio.play();
+      document.getElementById("playpause").value = "Pause";
+    }
+    var playPrevious =function(){
+      if(trackNumber > 1){
+        trackNumber -= 2;
+        playMusic();
+      }
+    }
+    </script>
+    <style>
+      .mood {
+        max-width:100%;
+        max-height:100%;
+      }
+      .mood:hover {
+        border:outset;
+        border-color: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="text-center" style="padding-top:1em;padding-bottom:3em">
+      <h3>Isai - Music Player</h3>
+      <hr></hr>
+      <h5>Music player created using JavaScript and HTML, which plays music according to your mood.</h5>
+    </div>
+    <div class="text-center" style="padding-top:1em;padding-bottom:5em">
+      <h4>How are you doing today?</h4>
+    </div>
+    <div class="row" style="padding-bottom:2em">
+      <div class="col-sm-1"></div>
+      <img src="Images/like.png" alt="like" class="col-sm-2 img-responsive mood" id="like" onclick='setPlaylist("like")'>
+      <img src="Images/love.png" alt="love" class="col-sm-2 img-responsive mood" id="love" onclick='setPlaylist("love")'>
+      <img src="Images/haha.png" alt="haha" class="col-sm-2 img-responsive mood" id="haha" onclick='setPlaylist("haha")'>
+      <img src="Images/wow.png" alt="wow" class="col-sm-2 img-responsive mood" id="wow" onclick='setPlaylist("wow")'>
+      <img src="Images/sad.png" alt="sad" class="col-sm-2 img-responsive mood" id="sad" onclick='setPlaylist("sad")'>
+      <div class="col-sm-1"></div>
+    </div>
+
+    <div class="text-center row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <div class="col-sm-4"><input type="button" onclick="playPrevious()" id="prev" value="Prev"></input></div>
+        <div class="col-sm-4"><input type="button" onclick="pauseMusic()" id="playpause" value="Pause"></input></div>
+        <div class="col-sm-4"><input type="button" onclick="playMusic()" id="next" value="Next"></input></div>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+
+  </body>
+</html>
