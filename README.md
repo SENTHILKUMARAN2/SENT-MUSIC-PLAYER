@@ -7,5 +7,4 @@ Then, choco starts playing music which perfectly suits his/her current mood.
 To run locally in your development evironemnt, Download the source file or clone the repository.
 Open the **index.html** file.
 
-## Preview
-![choco Music Player](/Images/image.png)
+
